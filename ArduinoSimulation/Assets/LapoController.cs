@@ -22,25 +22,25 @@ public class LapoController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        sPort.Open();
-        sPort.ReadTimeout = 1000;
+        sPort.Open();//Port is opened for data transfers
+        sPort.ReadTimeout = 1000;//timeout period for reading data
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(sPort.IsOpen)
+        if(sPort.IsOpen) //When the portal is running
         {
             try
             {
                 ShowMessageOne("Operation Started! Equipment Ready!");
-                string data = sPort.ReadLine();
-                string[] vals = data.Split(',');
+                string data = sPort.ReadLine();//reads incoming data
+                string[] vals = data.Split(',');//splits data into an array for organizing it as a delimeter
 
-                if (vals.Length == 3)
+                if (vals.Length == 3)//Match the data values for the 3 potentiometers
                 {
-                    float angle = float.Parse(vals[0]);
-                    float angle2 = float.Parse(vals[1]);
+                    float angle = float.Parse(vals[0]);//data values are parsed for different parts of the arm based on the values
+                    float angle2 = float.Parse(vals[1]);//of the potentiometers
                     float angle3 = float.Parse(vals[2]);
 
                     armPart1.localRotation = Quaternion.Euler(angle, 0, 0);
@@ -51,7 +51,7 @@ public class LapoController : MonoBehaviour
                 }
             }
 
-            catch (TimeoutException)
+            catch (TimeoutException)//If there's an intentional break in reading data from the port.
             {
                 ShowMessageTwo("Operation Not Started! Equipment Inactive!");
                 Debug.LogWarning("Timeout reading serial port");
@@ -60,7 +60,7 @@ public class LapoController : MonoBehaviour
         }
     }
 
-    public void ShowMessageOne(string msg)
+    public void ShowMessageOne(string msg)//Toggle between the 2 on-screen messages depending on the state of the arduino.
     {
         text1.text = msg;
         text1.gameObject.SetActive(true);
@@ -74,7 +74,7 @@ public class LapoController : MonoBehaviour
         text1.gameObject.SetActive(false);
     }
 
-    private void OnApplicationQuit()
+    private void OnApplicationQuit()//the serial port is closed properly when the unity scene is exited and does not continue running.
     {
         if (sPort.IsOpen)
         {
