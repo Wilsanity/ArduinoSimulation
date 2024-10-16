@@ -1,0 +1,7 @@
+Mid-Late September: Dilan, Dylan, and Michael took the idea for the project and began
+writing the abstract and background info sections before moving towards researching 
+other solutions. Michael also crafted our ideas for the design thinking process and 
+setup the GitHub repository as well as making our Unity scene setup.
+
+Early October: Dilan began getting Arduino parts and creating the Tinkercad simulation
+as well as physical components. Dylan was formatting the document while Michael was preparing our in-class presentation with Dilan. Dilan and Michael also helped format the document.
